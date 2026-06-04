@@ -1,6 +1,6 @@
 import numpy as np
 
-SIMILARITY_THRESHOLD = 1.50
+SIMILARITY_THRESHOLD = 3.0
 
 
 def get_answer(
@@ -30,27 +30,29 @@ def get_answer(
 
     distances, indices = index.search(
         query_embedding,
-        k=3
+        k=5
+    )
+
+    best_distance = float(
+        distances[0][0]
     )
 
     # ----------------------------------
     # HALLUCINATION GUARD
     # ----------------------------------
 
-    best_distance = float(
-        distances[0][0]
-    )
-
     if best_distance > SIMILARITY_THRESHOLD:
 
         return {
+
             "answer":
             "This information is not available in the document.",
 
             "confidence": 0,
 
-            "source":
-            "No relevant source found."
+            "source": [
+                "No relevant information found."
+            ]
         }
 
     # ----------------------------------
@@ -59,18 +61,21 @@ def get_answer(
 
     context = ""
 
-    source_chunks = []
+    source_preview = []
 
     for idx in indices[0]:
 
         if idx < len(chunks):
 
+            chunk_text = chunks[idx]
+
             context += (
-                chunks[idx] + "\n\n"
+                chunk_text +
+                "\n\n"
             )
 
-            source_chunks.append(
-                idx + 1
+            source_preview.append(
+                chunk_text[:350]
             )
 
     # ----------------------------------
@@ -78,16 +83,21 @@ def get_answer(
     # ----------------------------------
 
     prompt = f"""
-You are a document assistant.
+You are an AI Research Assistant.
 
-Rules:
+STRICT RULES:
 
-1. Answer ONLY using the context.
-2. Do not use outside knowledge.
-3. If answer is not available,
-   reply exactly:
+1. Answer ONLY using the provided context.
+2. Never use outside knowledge.
+3. Never guess information.
+4. If answer is missing, reply exactly:
 
 This information is not available in the document.
+
+5. Keep answers concise and factual.
+6. Give answers in a professional interview-ready format.
+7. Do not mention context, chunks, retrieval process, embeddings, vector database, or sources.
+8. Give direct answers.
 
 Context:
 {context}
@@ -97,7 +107,7 @@ Question:
 """
 
     # ----------------------------------
-    # GEMINI RESPONSE
+    # GENERATE ANSWER
     # ----------------------------------
 
     try:
@@ -106,7 +116,9 @@ Question:
             prompt
         )
 
-        answer = response.text
+        answer = (
+            response.text.strip()
+        )
 
     except Exception:
 
@@ -121,11 +133,15 @@ Question:
     confidence = int(
 
         max(
-            0,
+            50,
             min(
                 100,
-                (1 - best_distance / 2)
-                * 100
+                (
+                    1 -
+                    (
+                        best_distance / 5
+                    )
+                ) * 100
             )
         )
 
@@ -141,7 +157,6 @@ Question:
 
         "confidence": confidence,
 
-        "source":
-        f"Retrieved Chunks: {source_chunks}"
+        "source": source_preview
 
     }

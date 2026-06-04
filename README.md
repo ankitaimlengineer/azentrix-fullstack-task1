@@ -1,217 +1,188 @@
-# 🤖 AI Research Assistant (RAG-Based PDF Q&A Bot)
+# 🤖 AI Research Assistant
 
-An intelligent Document Question Answering System built using Streamlit, FAISS, Sentence Transformers, and Google Gemini.
+A Context-Aware Document Question Answering System built using Streamlit, FAISS, Sentence Transformers, and Google Gemini.
 
-The application allows users to upload PDF documents and ask questions based only on the content of the uploaded document.
-
----
-
-## 🚀 Features
-
-### 📄 PDF Upload
-Upload any PDF document.
-
-### 🔍 Intelligent Retrieval
-Uses vector embeddings and FAISS similarity search to retrieve relevant document chunks.
-
-### 🤖 Gemini Powered Answers
-Answers are generated using Google Gemini 2.5 Flash.
-
-### 🛡 Hallucination Protection
-If information is not available in the document, the assistant responds:
-
-> This information is not available in the document.
-
-### 💬 Chat Interface
-Modern ChatGPT-style conversation UI.
-
-### 📊 Confidence Score
-Displays confidence level for each answer.
-
-### 📚 Source Tracking
-Shows retrieved document chunks used to generate the answer.
-
-### 📝 Document Summary
-Automatically generates a summary of the uploaded document.
-
-### 🔑 Topic Extraction
-Extracts key topics from the uploaded document.
-
-### 🌙 Dark Theme
-Professional dark-themed interface.
+The application allows users to upload PDF documents and ask questions based strictly on the uploaded document.
 
 ---
 
-# 🏗 Architecture
+# Features
 
-```text
+✅ PDF Upload
+
+✅ RAG Based Retrieval
+
+✅ Gemini 2.5 Flash Integration
+
+✅ Hallucination Protection
+
+✅ Confidence Score
+
+✅ Source Tracking
+
+✅ Document Summary
+
+✅ Key Topic Extraction
+
+✅ Download Chat
+
+✅ Professional Dark UI
+
+---
+
+# Problem Statement
+
+People spend significant time searching lengthy documents for specific information.
+
+This project solves that problem by enabling users to upload a PDF and interact with it using natural language questions.
+
+The assistant answers only from the provided document and avoids generating unsupported information.
+
+---
+
+# Architecture
+
 PDF Upload
-    │
-    ▼
-PDF Text Extraction
-    │
-    ▼
-Text Chunking
-    │
-    ▼
+↓
+PDF Extraction
+↓
+Chunking
+↓
 Sentence Embeddings
-    │
-    ▼
+↓
 FAISS Vector Store
-    │
-    ▼
+↓
 Similarity Search
-    │
-    ▼
+↓
 Context Retrieval
-    │
-    ▼
+↓
 Gemini 2.5 Flash
-    │
-    ▼
-Final Answer
-```
+↓
+Answer Generation
 
 ---
 
-# 🛠 Tech Stack
+# Tech Stack
 
-- Python
-- Streamlit
-- Google Gemini 2.5 Flash
-- FAISS
-- Sentence Transformers
-- NumPy
-- PyPDF
-- Python Dotenv
+* Python
+* Streamlit
+* Google Gemini 2.5 Flash
+* Sentence Transformers
+* FAISS
+* NumPy
+* PyPDF
+* Python Dotenv
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
-```text
 azentrix-fullstack-task1/
 
-│
 ├── app.py
+
 ├── chatbot.py
+
 ├── vector_store.py
+
 ├── pdf_reader.py
+
 ├── requirements.txt
+
+├── README.md
+
+├── DESIGN.md
+
 ├── .env
-│
-├── .streamlit
-│   └── config.toml
-│
-└── README.md
-```
+
+└── .streamlit/config.toml
 
 ---
 
-# ⚙ Installation
+# Installation
 
-Clone the repository:
+Clone Repository
 
-```bash
-git clone <your-repository-url>
-```
+git clone YOUR_REPOSITORY_URL
 
-Move into project directory:
+Move to Project Folder
 
-```bash
 cd azentrix-fullstack-task1
-```
 
-Create virtual environment:
+Create Virtual Environment
 
-```bash
 python -m venv venv
-```
 
-Activate virtual environment:
+Activate Environment
 
 Windows:
 
-```bash
 venv\Scripts\activate
-```
 
-Install dependencies:
+Install Dependencies
 
-```bash
 pip install -r requirements.txt
-```
 
 ---
 
-# 🔑 Environment Variable
+# Environment Variable
 
-Create a `.env` file in project root.
+Create .env file
 
-```env
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY
-```
+GEMINI_API_KEY=YOUR_API_KEY
 
 ---
 
-# ▶ Run Application
+# Run Project
 
-```bash
 streamlit run app.py
-```
 
 ---
 
-# 📸 Screenshots
+# Screenshots
 
-Add screenshots here:
+Add screenshots in screenshots folder.
 
-### Home Page
+Suggested screenshots:
 
-![Home](screenshots/home.png)
-
-### PDF Upload
-
-![Upload](screenshots/upload.png)
-
-### Question Answering
-
-![QA](screenshots/qa.png)
+* Home Screen
+* PDF Upload
+* Document Summary
+* Question Answering
+* Confidence Score
+* Source Display
 
 ---
 
-# 🎥 Demo Video
+# Demo Video
 
-Loom Demo Link:
-
-```text
-Paste your Loom URL here
-```
+Add Loom Video Link Here
 
 ---
 
-# 📈 Future Improvements
+# Future Improvements
 
-- Multi-PDF Support
-- Citation-Based Answers
-- Page Number References
-- ChromaDB Integration
-- LangChain Integration
-- Conversation Memory
-- Agentic AI Workflow
+* Multi PDF Support
+* Citation Based Answers
+* OCR Support
+* ChromaDB Integration
+* Agentic AI Workflows
+* Cloud Deployment
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 Ankit Thummar
 
-AI / ML Enthusiast
+BCA Graduate
 
 Python Developer
 
+AI & Machine Learning Enthusiast
+
 ---
 
-# 📄 License
+# License
 
-This project is developed for internship assessment purposes.
+This project is submitted as part of the Azentrix Generative AI Internship Assessment.

@@ -1,8 +1,13 @@
 streamlit
-pypdf
-faiss-cpu
-sentence-transformers
 google-generativeai
 python-dotenv
+pypdf
+sentence-transformers
+faiss-cpu
 numpy
 torch
+scikit-learn
+tqdm
+transformers
+huggingface-hub
+safetensors
