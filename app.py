@@ -1,6 +1,9 @@
+from ui import load_ui, show_header
 import streamlit as st
 import google.generativeai as genai
 import os
+load_ui()
+show_header()
 
 from dotenv import load_dotenv
 
